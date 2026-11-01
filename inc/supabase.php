@@ -12,11 +12,20 @@ const SB_TIMEOUT = 10;
 /* Selon l'hébergeur, une variable d'environnement arrive dans $_SERVER, dans
    $_ENV ou seulement via getenv() : on regarde les trois plutôt que de dépendre
    d'un seul, sinon le site tombe en panne sur une plateforme et pas sur l'autre. */
+/* Valeurs par défaut du projet Supabase « Twins Sushi », utilisées si l'hébergeur
+   ne fournit pas les variables. Toutes deux publiques par nature (la clé
+   publishable ne donne que les droits « anon », bornés par les règles RLS).
+   Une variable d'environnement, si elle existe, reste prioritaire. */
+const SB_DEFAULTS = [
+    'SUPABASE_URL'      => 'https://hotljolgilrpqhurfsrl.supabase.co',
+    'SUPABASE_ANON_KEY' => 'sb_publishable_SssQ4Cg8YKx_ewg5JOqVHg_pExUJE9w',
+];
+
 function sb_env(string $name): string {
     foreach ([$_SERVER[$name] ?? null, $_ENV[$name] ?? null, getenv($name)] as $v) {
         if (is_string($v) && $v !== '') return trim($v);
     }
-    return '';
+    return SB_DEFAULTS[$name] ?? '';
 }
 
 function sb_url(): string {
