@@ -481,3 +481,10 @@ a.trio-c:hover .trio-go { border-color: var(--gold); }
 .drink { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin: 2px 0 2px; padding: 3px 14px 3px 3px; border-radius: 12px; border: 1px solid var(--line); background: rgba(224, 188, 120, .08); font: 700 12px var(--sans); color: var(--gold); letter-spacing: .02em; }
 .drink img { width: 34px; height: 42px; border-radius: 8px; object-fit: cover; }
 .p.txt .drink { margin-top: 8px; } .qv-txt .drink { justify-self: start; }
+
+/* Photos naturelles (25 novembre 2026) : fond vert du shooting, donc photos encadrées, plus de fondu sur le bleu */
+.h3-photo.h3-cadre { right: max(24px, calc((100vw - var(--wrap)) / 2)); width: min(40vw, 560px); margin-top: calc(min(40vw, 560px) * -0.4537); border-radius: 30px; border: 1px solid var(--line); box-shadow: 0 34px 70px rgba(5, 9, 18, .55); -webkit-mask-image: none; mask-image: none; z-index: 0; }
+.hero3 .h3-txt { position: relative; z-index: 1; }
+.h3-tag { bottom: 40px; }
+@media (max-width: 900px) { .h3-photo.h3-cadre { position: relative; right: auto; left: auto; top: auto; width: calc(100% - 32px); margin: 16px 16px 24px; } }
+.trio-ph > img:first-child { aspect-ratio: 4/3; object-fit: cover; }

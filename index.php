@@ -104,7 +104,7 @@ foreach ($cats as $c) foreach ($c['items'] as $i) $byName[$i['name']] = $i + ['c
 /* Sélections de l'accueil : signatures et rolls de la box à composer (à valider par Houssam). */
 $sigNames = ['Twins Deluxe', 'Dragon Roll', 'Crunchy Crevette', 'Okinawa Anguille'];
 /* Photos de biais du shooting (assets/beaute/) ; sans photo de biais : plateau vu de dessus + loupe. */
-$sigBeau = ['Dragon Roll' => 'dragon-roll', 'Crunchy Crevette' => 'crunchy-crevette', 'Okinawa Anguille' => 'okinawa-anguille'];
+$sigBeau = ['Dragon Roll' => 'dragon-naturel', 'Crunchy Crevette' => 'crunchy-naturel', 'Okinawa Anguille' => 'okinawa-naturel'];   /* photos naturelles, recette unique (25 nov. 2026) */
 $sigLoupe = ['Twins Deluxe' => 'loupe-twins-deluxe'];
 /* Box à composer : le client choisit librement ses 4 rolls dans ces rubriques (Houssam, 22 novembre 2026). */
 $boxCats = ['street-rolls', 'spring', 'signature-rolls', 'california', 'crousty', 'aromaki', 'maki'];
@@ -195,7 +195,7 @@ header('Cache-Control: public, max-age=120');
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="<?= h($fontJp) ?>">
 <link rel="stylesheet" href="<?= $v('assets/site.css') ?>">
-<link rel="preload" as="image" href="assets/beaute/okinawa-anguille.webp" fetchpriority="high">
+<link rel="preload" as="image" href="assets/beaute/okinawa-naturel.webp" fetchpriority="high">
 <script type="application/ld+json"><?= json_encode($ld, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG) ?></script>
 </head>
 <body>
@@ -211,7 +211,7 @@ header('Cache-Control: public, max-age=120');
 
 <main id="top">
 <section class="hero3" aria-label="Twins Sushi">
-<img class="h3-photo par" data-speed="-0.04" src="assets/beaute/okinawa-anguille.webp" alt="Okinawa Anguille : saumon, cheese, anguille" width="1800" height="1013" fetchpriority="high">
+<img class="h3-photo h3-cadre" src="assets/beaute/okinawa-naturel.webp" alt="Okinawa Anguille : saumon, cheese, anguille" width="1200" height="1089" fetchpriority="high">
 <div class="h3-kanji" aria-hidden="true" lang="ja">双子</div>
 <div class="wrap h3-in"><div class="h3-txt">
 <span class="kicker">Sushis &amp; cuisine asiatique · <?= h($S['quartier']) ?>, <?= h($S['ville']) ?></span>
@@ -231,7 +231,7 @@ header('Cache-Control: public, max-age=120');
 <p class="lead">Twins Street Rolls · 6 pièces.</p>
 <div class="trio">
 <?php foreach ([['Pink', 'roulé dans une fine tranche de blanc de dinde fumé', 'pink'], ['Tamago', 'roulé dans une omelette japonaise', 'tamago'], ['Neige', 'maki inversé, le riz à l’extérieur', 'neige']] as $k => [$tn, $td, $tf]): ?>
-<a class="trio-c rv" href="#street-rolls" data-famille="<?= h($tn) ?>" aria-label="Voir les rolls <?= h($tn) ?>"><div class="trio-ph"><img src="assets/beaute/<?= $tf ?>.webp" alt="Roll <?= h($tn) ?>, vu de biais" width="900" height="341" loading="lazy"><img class="loupe" src="assets/beaute/loupe-<?= $tf ?>.webp" alt="" width="600" height="600" loading="lazy"></div>
+<a class="trio-c rv" href="#street-rolls" data-famille="<?= h($tn) ?>" aria-label="Voir les rolls <?= h($tn) ?>"><div class="trio-ph"><img src="assets/beaute/<?= $tf ?>-naturel.webp" alt="Roll <?= h($tn) ?>" width="800" height="800" loading="lazy"></div>
 <span class="kicker">0<?= $k + 1 ?></span><h3><?= h($tn) ?></h3><p><?= h($td) ?></p><span class="trio-go">Voir les <?= h($tn) ?> →</span></a>
 <?php endforeach; ?>
 </div>
