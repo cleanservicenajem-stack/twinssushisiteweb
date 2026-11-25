@@ -326,6 +326,32 @@
 (function () {
   "use strict";
   var T = window.Twins, reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  /* Cartes Pink / Tamago / Neige : affichent seulement les rolls de cette famille dans la carte */
+  function famille(nom) {
+    var cat = document.getElementById("street-rolls"); if (!cat) return;
+    var q = document.getElementById("q"); if (q && q.value) { q.value = ""; q.dispatchEvent(new Event("input")); }
+    [].forEach.call(document.querySelectorAll(".fchip[aria-pressed='true']"), function (b) { b.click(); });
+    var pre = nom === "Tamago" ? "tamago roll" : nom.toLowerCase(), n = 0;
+    [].forEach.call(document.querySelectorAll(".cat"), function (c) { c.hidden = c !== cat; });
+    [].forEach.call(cat.querySelectorAll(".p"), function (p) {
+      var ok = (p.querySelector("h4").textContent || "").toLowerCase().indexOf(pre) === 0; p.hidden = !ok; if (ok) n++;
+    });
+    var bar = document.getElementById("fam-bar");
+    if (!bar) { bar = document.createElement("div"); bar.id = "fam-bar"; bar.className = "fam-bar"; cat.insertBefore(bar, cat.querySelector(".grid")); }
+    bar.hidden = false;
+    bar.innerHTML = "<span>Rolls " + nom + " · " + n + " choix</span><button type=\"button\" class=\"btn btn-ligne\" data-fam-reset>Voir toute la carte</button>";
+    cat.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  }
+  function toutVoir() {
+    [].forEach.call(document.querySelectorAll(".cat, .cat .p"), function (el) { el.hidden = false; });
+    var bar = document.getElementById("fam-bar"); if (bar) bar.hidden = true;
+  }
+  document.addEventListener("input", function (e) { if (e.target && e.target.id === "q") { var bar = document.getElementById("fam-bar"); if (bar) bar.hidden = true; } });
+  document.addEventListener("click", function (e) {
+    var f = e.target.closest && e.target.closest("[data-famille]");
+    if (f) { e.preventDefault(); famille(f.getAttribute("data-famille")); return; }
+    if (e.target.closest && e.target.closest("[data-fam-reset]")) { toutVoir(); return; }
+  });
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-qv]");
     if (b && T && T.openQV) { e.preventDefault(); T.openQV(b.getAttribute("data-qv")); }

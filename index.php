@@ -223,8 +223,8 @@ header('Cache-Control: public, max-age=120');
 <p class="lead">Twins Street Rolls · 6 pièces.</p>
 <div class="trio">
 <?php foreach ([['Pink', 'roulé dans une fine tranche de blanc de dinde fumé', 'pink'], ['Tamago', 'roulé dans une omelette japonaise', 'tamago'], ['Neige', 'maki inversé, le riz à l’extérieur', 'neige']] as $k => [$tn, $td, $tf]): ?>
-<article class="trio-c rv"><div class="trio-ph"><img src="assets/beaute/<?= $tf ?>.webp" alt="Roll <?= h($tn) ?>, vu de biais" width="900" height="341" loading="lazy"><img class="loupe" src="assets/beaute/loupe-<?= $tf ?>.webp" alt="" width="600" height="600" loading="lazy"></div>
-<span class="kicker">0<?= $k + 1 ?></span><h3><?= h($tn) ?></h3><p><?= h($td) ?></p></article>
+<a class="trio-c rv" href="#street-rolls" data-famille="<?= h($tn) ?>" aria-label="Voir les rolls <?= h($tn) ?>"><div class="trio-ph"><img src="assets/beaute/<?= $tf ?>.webp" alt="Roll <?= h($tn) ?>, vu de biais" width="900" height="341" loading="lazy"><img class="loupe" src="assets/beaute/loupe-<?= $tf ?>.webp" alt="" width="600" height="600" loading="lazy"></div>
+<span class="kicker">0<?= $k + 1 ?></span><h3><?= h($tn) ?></h3><p><?= h($td) ?></p><span class="trio-go">Voir les <?= h($tn) ?> →</span></a>
 <?php endforeach; ?>
 </div>
 <div class="trio-cta"><a class="btn btn-plein" href="#street-rolls">Voir les Twins Street Rolls</a></div>
