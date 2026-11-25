@@ -353,6 +353,11 @@
     if (f) { e.preventDefault(); famille(f.getAttribute("data-famille")); return; }
     if (e.target.closest && e.target.closest("[data-fam-reset]")) { toutVoir(); return; }
   });
+  /* « Y aller » : affiche le plan tout de suite en arrivant sur l'adresse */
+  document.addEventListener("click", function (e) {
+    if (!(e.target.closest && e.target.closest("[data-y-aller]"))) return;
+    var m = document.querySelector(".map-load"); if (m) m.click();
+  });
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("[data-qv]");
     if (b && T && T.openQV) { e.preventDefault(); T.openQV(b.getAttribute("data-qv")); }

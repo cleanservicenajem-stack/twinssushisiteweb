@@ -204,7 +204,8 @@ header('Cache-Control: public, max-age=120');
 <?php if (!empty($S['annonce'])): ?><div class="annonce" role="note"><?= h($S['annonce']) ?></div><?php endif; ?>
 <header class="bar"><div class="wrap">
 <a class="brand" href="#top" aria-label="Twins Sushi, haut de page"><img class="logo-d" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="66" height="60"><img class="logo-l" src="assets/img/logo-96.webp" alt="Twins Sushi" width="66" height="60"></a>
-<nav class="nav" aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a></nav>
+<nav class="nav" aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="#y-aller" data-y-aller>Y aller</a></nav>
+<a class="go-pin" href="#y-aller" data-y-aller aria-label="Y aller : adresse et plan"><?= $ICON['pin'] ?><span>Y aller</span></a>
 <button class="theme" type="button" aria-label="Changer de thème (sombre / clair)" title="Sombre / clair"><?= $ICON['moon'] ?></button>
 <button class="cart-btn" type="button" data-open-cart aria-label="Voir ma commande"><?= $ICON['bag'] ?><span class="lbl">Ma commande</span><span class="n cart-count">0</span></button>
 </div></header>
@@ -300,7 +301,7 @@ header('Cache-Control: public, max-age=120');
 
 <section class="sec infos" id="infos"><div class="wrap"><div class="sec-head"><h2>Infos pratiques</h2><span class="jp" lang="ja">店舗情報</span><span class="rule"></span></div>
 <div class="info-grid">
-<div class="info"><h3>Adresse</h3><p><?= h($S['rue']) ?><br><?= h($S['quartier']) ?>, <?= h($S['cp']) ?> <?= h($S['ville']) ?></p><p><a href="<?= h($maps) ?>" target="_blank" rel="noopener">Itinéraire Google Maps</a></p></div>
+<div class="info" id="y-aller"><h3>Adresse</h3><p><?= h($S['rue']) ?><br><?= h($S['quartier']) ?>, <?= h($S['cp']) ?> <?= h($S['ville']) ?></p><p><a href="<?= h($maps) ?>" target="_blank" rel="noopener">Itinéraire Google Maps</a></p></div>
 <div class="info"><h3>Horaires</h3><p><span class="openst" hidden></span></p><table class="hours"><tbody><?php foreach ($S['horaires'] as $hh): ?><tr data-days="<?= h($hh['days']) ?>"><td><?= h($hh['label']) ?></td><td><?= h($hh['text']) ?></td></tr><?php endforeach; ?></tbody></table><p class="small">Livraison et à emporter, 7j/7.</p></div>
 <div class="info"><h3>Contact</h3>
 <?php if (preg_replace('/\D/', '', (string)$S['tel']) === preg_replace('/\D/', '', (string)$S['wa'])): /* un seul numéro (Houssam, 25 nov. 2026) */ ?>
@@ -318,7 +319,7 @@ header('Cache-Control: public, max-age=120');
 <footer class="foot2"><div class="wrap">
 <img class="f-logo" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="120" height="110" loading="lazy">
 <p class="f-slogan">« Jamais l’un sans l’autre »</p>
-<div class="links"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="assets/carte/carte-twins-sushi-smartphone.pdf" target="_blank" rel="noopener">Carte (téléphone)</a><a href="assets/carte/carte-twins-sushi.pdf" target="_blank" rel="noopener">Grande carte (PDF)</a><?= implode('', $social) ?></div>
+<div class="links"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="#y-aller" data-y-aller>Y aller</a><a href="assets/carte/carte-twins-sushi-smartphone.pdf" target="_blank" rel="noopener">Carte (téléphone)</a><a href="assets/carte/carte-twins-sushi.pdf" target="_blank" rel="noopener">Grande carte (PDF)</a><?= implode('', $social) ?></div>
 <p class="f-small"><?= h($S['rue']) ?> · <?= h($S['quartier']) ?> · <?= h($S['ville']) ?> · <a href="<?= h($waOrder) ?>" target="_blank" rel="noopener">WhatsApp <?= h($S['wa_affiche']) ?></a></p>
 <p class="f-small">Prix en dirhams TTC. © <?= date('Y') ?> Twins Sushi</p>
 </div></footer>
