@@ -14,8 +14,9 @@ define('MAX_BACKUPS', 40);
 
 require __DIR__ . '/supabase.php';
 
-const BADGES = ['' => 'Aucun', 'vege' => 'Végé', 'epice' => 'Épicé', 'croustillant' => 'Croustillant',
-                'bestseller' => 'Best-seller', 'nouveau' => 'Nouveau', 'signature' => 'Signature', 'partager' => 'À partager'];
+/* Charte de la carte : deux pastilles seulement (Veggie, Épicé). Les anciennes valeurs de la base
+   (croustillant, best-seller, nouveau…) restent lisibles mais ne sont plus proposées. */
+const BADGES = ['' => 'Aucun', 'vege' => 'Veggie', 'epice' => 'Épicé'];
 
 function h(?string $s): string { return htmlspecialchars((string)$s, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8'); }
 
@@ -25,7 +26,14 @@ function h(?string $s): string { return htmlspecialchars((string)$s, ENT_QUOTES 
    $token non nul (admin connecté) = on voit aussi les plats masqués. */
 
 function menu(?string $token = null): array {
-    $rows = sb_select('categories', 'select=id,title,jp,visible,items(code,name,description,price,pcs,show_pcs,badge,image,available,visible,sort_order)&order=sort_order', $token);
+    /* Colonnes ajoutées par supabase/migration-carte-vf.sql (note, banner, options, persons).
+       Si la migration n'est pas encore passée, on relit l'ancien format plutôt que de tomber en panne. */
+    $base = 'code,name,description,price,pcs,show_pcs,badge,image,available,visible,sort_order';
+    try {
+        $rows = sb_select('categories', "select=id,title,jp,visible,note,banner,items($base,options,persons)&order=sort_order", $token);
+    } catch (Throwable $e) {
+        $rows = sb_select('categories', "select=id,title,jp,visible,items($base)&order=sort_order", $token);
+    }
     $cats = [];
     foreach ($rows as $c) {
         $items = $c['items'] ?? [];
@@ -34,19 +42,29 @@ function menu(?string $token = null): array {
             'id'      => (string)$c['id'],
             'title'   => (string)$c['title'],
             'jp'      => (string)($c['jp'] ?? ''),
+            'note'    => (string)($c['note'] ?? ''),
+            'banner'  => (string)($c['banner'] ?? ''),
             'visible' => (bool)($c['visible'] ?? true),
-            'items'   => array_map(fn($i) => [
-                'code'      => (string)$i['code'],
-                'name'      => (string)$i['name'],
-                'desc'      => (string)($i['description'] ?? ''),
-                'price'     => $i['price'] === null ? null : (int)$i['price'],
-                'pcs'       => (int)($i['pcs'] ?? 1),
-                'showPcs'   => (bool)($i['show_pcs'] ?? false),
-                'badge'     => (string)($i['badge'] ?? ''),
-                'img'       => (string)($i['image'] ?? ''),
-                'available' => (bool)($i['available'] ?? true),
-                'visible'   => (bool)($i['visible'] ?? true),
-            ], $items),
+            'items'   => array_map(function ($i) {
+                $opts = [];
+                foreach ((array)($i['options'] ?? []) as $o) {
+                    if (is_array($o) && isset($o['l'], $o['p'])) $opts[] = ['l' => (string)$o['l'], 'p' => (int)$o['p']];
+                }
+                return [
+                    'code'      => (string)$i['code'],
+                    'name'      => (string)$i['name'],
+                    'desc'      => (string)($i['description'] ?? ''),
+                    'price'     => $i['price'] === null ? null : (int)$i['price'],
+                    'pcs'       => (int)($i['pcs'] ?? 1),
+                    'showPcs'   => (bool)($i['show_pcs'] ?? false),
+                    'badge'     => (string)($i['badge'] ?? ''),
+                    'img'       => (string)($i['image'] ?? ''),
+                    'available' => (bool)($i['available'] ?? true),
+                    'visible'   => (bool)($i['visible'] ?? true),
+                    'opts'      => $opts,
+                    'pers'      => (string)($i['persons'] ?? ''),
+                ];
+            }, $items),
         ];
     }
     return ['categories' => $cats];
@@ -69,8 +87,10 @@ function settings(?string $token = null): array {
     return $out;
 }
 
+/* Prix affiché sur la carte : chiffres seuls (charte), « dès » quand le prix dépend du choix. */
 function price_label(array $it): string {
-    return $it['price'] === null || $it['price'] === '' ? '' : ((int)$it['price']) . ' DH';
+    if (!empty($it['opts'])) return 'dès ' . min(array_column($it['opts'], 'p'));
+    return $it['price'] === null || $it['price'] === '' ? '' : (string)((int)$it['price']);
 }
 
 /* ---------- Connexion admin : jetons Supabase ----------

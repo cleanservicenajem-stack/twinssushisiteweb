@@ -150,9 +150,21 @@ case 'item_save':
     else { if (!is_numeric($price) || $price < 0 || $price > 100000) fail('Prix invalide.'); $price = (int)round((float)$price); }
     $pcs = (int)($d['pcs'] ?? 1); if ($pcs < 1 || $pcs > 500) fail('Nombre de pièces invalide.');
     $badge = (string)($d['badge'] ?? ''); if (!array_key_exists($badge, BADGES)) $badge = '';
+    /* Choix de prix (« Veggie = 45 » une ligne par choix). Le prix de base devient le plus bas des choix. */
+    $opts = null;
+    if (array_key_exists('options', $d)) {
+        $opts = [];
+        foreach (preg_split('/\R/u', (string)$d['options']) ?: [] as $line) {
+            $line = trim($line);
+            if ($line === '') continue;
+            if (!preg_match('/^(.{1,30}?)\s*[=:]\s*(\d{1,6})$/u', $line, $mm)) fail('Choix de prix invalide : « ' . mb_substr($line, 0, 40) . ' » (format : Libellé = prix).');
+            $opts[] = ['l' => trim($mm[1]), 'p' => (int)$mm[2]];
+        }
+        if ($opts) $price = min(array_column($opts, 'p'));
+    }
     $row = [
         'name'        => str_in($d['name'] ?? '', 80, true, 'Nom'),
-        'description' => str_in($d['desc'] ?? '', 220, false, 'Description'),
+        'description' => str_in($d['desc'] ?? '', 400, false, 'Description'),
         'price'       => $price,
         'pcs'         => $pcs,
         'show_pcs'    => !empty($d['showPcs']),
@@ -160,6 +172,8 @@ case 'item_save':
         'available'   => !array_key_exists('available', $d) || !empty($d['available']),
         'visible'     => !array_key_exists('visible', $d) || !empty($d['visible']),
     ];
+    if ($opts !== null) $row['options'] = $opts ?: null;
+    if (array_key_exists('persons', $d)) $row['persons'] = str_in($d['persons'], 30, false, 'Nombre de personnes');
     if (preg_match('/\budon\b/i', $row['name'] . ' ' . $row['description'])) fail('« Udon » est un terme interne : utilisez « nouilles » (charte graphique).');
     $code = (string)($d['code'] ?? '');
     if ($code !== '') {
@@ -207,8 +221,9 @@ case 'cat_save':
     $id = (string)($in['id'] ?? '');
     if ($id !== '') {
         find_cat($m, $id);
-        sb_write('PATCH', 'categories', 'id=eq.' . rawurlencode($id),
-                 ['title' => $title, 'jp' => $jp, 'visible' => !empty($in['visible'])], $TOKEN);
+        $patch = ['title' => $title, 'jp' => $jp, 'visible' => !empty($in['visible'])];
+        if (array_key_exists('note', $in)) $patch['note'] = str_in($in['note'], 200, false, 'Accroche');
+        sb_write('PATCH', 'categories', 'id=eq.' . rawurlencode($id), $patch, $TOKEN);
     } else {
         $ids = array_column($m['categories'], 'id');
         $base = slug($title); $id = $base; $n = 2;

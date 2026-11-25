@@ -18,3 +18,6 @@
 /supabase/.temp/
 
 .DS_Store
+
+# Maquettes, outils et photos de travail : restent sur le Mac, jamais en ligne
+/maquettes/

@@ -217,10 +217,12 @@
         (it.img ? '<button class="b sm d" type="button" id="phrm">Retirer</button>' : "") + '<small class="muted fb100">JPG, PNG ou WebP, 8 Mo max. Fond détouré (PNG) conseillé.</small></div></div>'
         : '<p class="muted m0">Vous pourrez ajouter la photo juste après avoir créé le plat.</p>') +
       '<label class="f"><span>Nom du plat</span><input id="e-name" maxlength="80" value="' + esc(it.name) + '" placeholder="Ex. California Saumon Avocat"></label>' +
-      '<label class="f"><span>Description <em class="count" id="dc"></em></span><textarea id="e-desc" maxlength="220" placeholder="Ingrédients principaux, sans grammages">' + esc(it.desc) + '</textarea></label>' +
+      '<label class="f"><span>Description <em class="count" id="dc"></em></span><textarea id="e-desc" maxlength="400" placeholder="Ingrédients principaux, sans grammages">' + esc(it.desc) + '</textarea></label>' +
       '<div class="row3"><label class="f"><span>Prix (DH)</span><input id="e-price" type="number" inputmode="numeric" min="0" step="1" value="' + (it.price === null ? "" : esc(it.price)) + '" placeholder="Vide = prix à venir"></label>' +
       '<label class="f"><span>Nb de pièces</span><input id="e-pcs" type="number" inputmode="numeric" min="1" step="1" value="' + esc(it.pcs || 1) + '"></label>' +
       '<label class="f"><span>Badge</span><select id="e-badge">' + badges + '</select></label></div>' +
+      '<label class="f"><span>Choix de prix (facultatif) : une ligne par choix, « Libellé = prix »</span><textarea id="e-opts" placeholder="Veggie = 45&#10;Poulet = 61">' + esc((it.opts || []).map(function (o) { return o.l + " = " + o.p; }).join("\n")) + '</textarea></label>' +
+      '<label class="f"><span>Pour combien de personnes (box, facultatif)</span><input id="e-pers" maxlength="30" value="' + esc(it.pers || "") + '" placeholder="Ex. 3-4 pers."></label>' +
       '<label class="f"><span>Catégorie</span><select id="e-cat">' + cats + '</select></label>' +
       '<div class="checks"><label class="sw"><input type="checkbox" id="e-showpcs"' + (it.showPcs ? " checked" : "") + '>Afficher « X PCS » à côté du prix</label>' +
       '<label class="sw"><input type="checkbox" id="e-av"' + (it.available === false ? "" : " checked") + '>Disponible</label>' +
@@ -230,12 +232,12 @@
       '<button class="b" type="button" data-x>Annuler</button><button class="b p" type="button" id="save">' + (code ? "Enregistrer" : "Créer le plat") + '</button>';
     var M = modal(code ? "Modifier le plat" : "Nouveau plat", body, foot);
     var d = $("#e-desc", M.el), dc = $("#dc", M.el);
-    function cnt() { dc.textContent = d.value.length + "/220"; } d.addEventListener("input", cnt); cnt();
+    function cnt() { dc.textContent = d.value.length + "/400"; } d.addEventListener("input", cnt); cnt();
     $("#save", M.el).addEventListener("click", function () {
       var btn = this; btn.disabled = true;
       var payload = { cat: $("#e-cat", M.el).value, item: {
         code: it.code, name: $("#e-name", M.el).value, desc: d.value, price: $("#e-price", M.el).value, pcs: $("#e-pcs", M.el).value || 1,
-        badge: $("#e-badge", M.el).value, showPcs: $("#e-showpcs", M.el).checked, available: $("#e-av", M.el).checked, visible: $("#e-vis", M.el).checked } };
+        badge: $("#e-badge", M.el).value, options: $("#e-opts", M.el).value, persons: $("#e-pers", M.el).value, showPcs: $("#e-showpcs", M.el).checked, available: $("#e-av", M.el).checked, visible: $("#e-vis", M.el).checked } };
       api("item_save", payload).then(function (r) {
         apply(r); S.cat = payload.cat; M.close(); render(); toast(code ? "Plat enregistré" : "Plat créé");
         if (!code && r.code) editItem(r.code);
@@ -259,6 +261,7 @@
   function editCat(id) {
     var c = id ? S.menu.categories.filter(function (x) { return x.id === id; })[0] : { title: "", jp: "", visible: true, items: [] };
     var body = '<label class="f"><span>Titre</span><input id="c-title" maxlength="50" value="' + esc(c.title) + '" placeholder="Ex. Les Spéciaux"></label>' +
+      '<label class="f"><span>Accroche de la rubrique (facultatif)</span><input id="c-note" maxlength="200" value="' + esc(c.note || "") + '" placeholder="Ex. 6 pièces · roulés dans l’algue"></label>' +
       '<label class="f"><span>Sous-titre japonais (facultatif)</span><input id="c-jp" maxlength="30" value="' + esc(c.jp) + '" lang="ja" placeholder="Ex. スペシャル"></label>' +
       (id ? '<label class="sw"><input type="checkbox" id="c-vis"' + (c.visible === false ? "" : " checked") + '>Catégorie affichée sur le site</label>' : "") +
       '<div class="err" id="ce"></div>';
@@ -266,7 +269,7 @@
       '<button class="b" type="button" data-x>Annuler</button><button class="b p" type="button" id="csave">' + (id ? "Enregistrer" : "Créer") + '</button>';
     var M = modal(id ? "Catégorie" : "Nouvelle catégorie", body, foot);
     $("#csave", M.el).addEventListener("click", function () {
-      api("cat_save", { id: id || "", title: $("#c-title", M.el).value, jp: $("#c-jp", M.el).value, visible: id ? $("#c-vis", M.el).checked : true })
+      api("cat_save", { id: id || "", title: $("#c-title", M.el).value, jp: $("#c-jp", M.el).value, note: $("#c-note", M.el).value, visible: id ? $("#c-vis", M.el).checked : true })
         .then(function (r) { apply(r); S.cat = r.id; M.close(); render(); toast("Catégorie enregistrée"); })
         .catch(function (e) { $("#ce", M.el).textContent = e.message; });
     });
