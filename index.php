@@ -14,7 +14,7 @@ try {
     require __DIR__ . '/inc/indisponible.php';
     exit;
 }
-$v = fn(string $f) => $f . '?v=' . (@filemtime(__DIR__ . '/' . $f) ?: 1);
+$v = fn(string $f) => $f . '?v=' . substr((string)@md5_file(__DIR__ . '/' . $f), 0, 10); /* empreinte du contenu : sur Vercel la date des fichiers est toujours la même */
 require __DIR__ . '/inc/icons.php';
 
 $today = date('Y-m-d');

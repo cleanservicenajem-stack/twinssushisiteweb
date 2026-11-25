@@ -17,7 +17,7 @@ header('X-Frame-Options: DENY');
 header("Content-Security-Policy: default-src 'self'; img-src 'self' data: blob:; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'");
 header('Referrer-Policy: same-origin');
 header('Cache-Control: no-store');
-$v = fn(string $f) => $f . '?v=' . (@filemtime(__DIR__ . '/' . $f) ?: 1);
+$v = fn(string $f) => $f . '?v=' . substr((string)@md5_file(__DIR__ . '/' . $f), 0, 10); /* empreinte du contenu : sur Vercel la date des fichiers est toujours la même */
 ?><!doctype html>
 <html lang="fr">
 <head>
