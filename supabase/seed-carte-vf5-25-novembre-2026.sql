@@ -108,7 +108,7 @@ insert into public.items (code, category_id, name, description, price, pcs, show
   ('R08-07', 'california', 'California Surimi Avocat Cheese', 'concombre, tobiko', 35, 4, true, '', 'assets/menu/california-surimi-avocat-cheese.webp', true, true, null, '', 6),
   ('R08-08', 'california', 'California Thon Cheese', 'concombre, sésame noir', 35, 4, true, '', 'assets/menu/california-thon-cheese.webp', true, true, null, '', 7),
   ('R08-09', 'california', 'California Poulet Crispy', 'avocat, mayo épicée, oignon frit', 35, 4, true, '', 'assets/menu/california-poulet-crispy.webp', true, true, null, '', 8),
-  ('R08-10', 'california', 'Crispy Salmon', 'avocat, sauce teriyaki', 35, 4, true, '', 'assets/menu/california-saumon-oignon-frit.webp', true, true, null, '', 9),
+  ('R08-10', 'california', 'Crispy Salmon', 'saumon, avocat, sauce teriyaki', 35, 4, true, '', 'assets/menu/california-saumon-oignon-frit.webp', true, true, null, '', 9),
   ('R09-01', 'crousty', 'Crousty Crevette', 'crevette tempura, surimi, cheese', 40, 6, true, '', 'assets/menu/crousty-crevette.webp', true, true, null, '', 0),
   ('R09-02', 'crousty', 'Crousty Saumon', 'saumon, surimi, cheese', 40, 6, true, '', 'assets/menu/crousty-saumon.webp', true, true, null, '', 1),
   ('R09-03', 'crousty', 'Crousty Poulet Cheese', 'poulet, avocat, cheese', 40, 6, true, '', 'assets/menu/crousty-poulet-cheese.webp', true, true, null, '', 2),

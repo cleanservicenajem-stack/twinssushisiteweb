@@ -476,3 +476,8 @@ a.trio-c:hover .trio-go { border-color: var(--gold); }
 .bar .brand img { height: 52px; width: auto; }
 @media (max-width: 760px) { .bar .brand img { height: 46px; } }
 .f-small a { color: var(--gold); text-decoration: none; } .stats b small { font-size: .38em; margin-right: 4px; vertical-align: middle; }
+
+/* Boisson comprise (Menus, Formules) */
+.drink { align-self: flex-start; display: inline-flex; align-items: center; gap: 8px; margin: 2px 0 2px; padding: 3px 14px 3px 3px; border-radius: 12px; border: 1px solid var(--line); background: rgba(224, 188, 120, .08); font: 700 12px var(--sans); color: var(--gold); letter-spacing: .02em; }
+.drink img { width: 34px; height: 42px; border-radius: 8px; object-fit: cover; }
+.p.txt .drink { margin-top: 8px; } .qv-txt .drink { justify-self: start; }

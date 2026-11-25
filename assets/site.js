@@ -219,6 +219,7 @@
       (it.photo ? '<div class="qv-ph">' + T.badge(it) + '<img src="' + esc(T.photo(it)) + '" alt="' + esc(it.name) + '"></div>' : "") +
       '<div class="qv-txt"><span class="kicker">' + esc(it.catTitle) + '</span><h3>' + esc(it.name) + "</h3>" + (meta ? '<p class="pcs">' + esc(meta) + "</p>" : "") +
       (it.desc ? '<p class="d">' + esc(it.desc) + "</p>" : "") + T.optSelect(it) +
+      (it.drink ? '<span class="drink"><img src="' + T.base + 'assets/beaute/boisson-rond.webp" alt="">+ ' + it.drink + " boisson" + (it.drink > 1 ? "s" : "") + "</span>" : "") +
       '<div class="foot"><span class="price">' + T.priceText(it) + "</span>" + T.addBtn(it) + "</div></div></div>";
     document.body.appendChild(w); document.body.style.overflow = "hidden"; var x = $(".x", w); if (x) x.focus();
   };

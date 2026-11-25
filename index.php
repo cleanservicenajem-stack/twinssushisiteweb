@@ -41,6 +41,14 @@ function img_tag(string $img, string $alt, string $sizes): string {
     $set = $t !== '' ? ' srcset="' . h($t) . ' 420w, ' . h($img) . ' 760w" sizes="' . $sizes . '"' : '';
     return '<img src="' . h($src) . '"' . $set . ' alt="' . h($alt) . '" loading="lazy" decoding="async">';
 }
+/* Boisson comprise : Menus et Formules (1 boisson au choix), Formule Pizza (2), d'après la carte. */
+function drinks(array $i, string $cid): int {
+    if ($i['name'] === 'Formule Pizza') return 2;
+    return in_array($cid, ['menus', 'formules'], true) ? 1 : 0;
+}
+function drink_html(int $n): string {
+    return $n ? '<span class="drink"><img src="assets/beaute/boisson-rond.webp" alt="" width="34" height="42" loading="lazy">+ ' . $n . ' boisson' . ($n > 1 ? 's' : '') . '</span>' : '';
+}
 function min_price(array $i): ?int {
     if (!empty($i['opts'])) return (int)min(array_column($i['opts'], 'p'));
     return $i['price'] === null || $i['price'] === '' ? null : (int)$i['price'];
@@ -66,7 +74,7 @@ function card_html(array $i, array $c, array $ICON): string {
         foreach ($i['opts'] as $k => $op) $o .= '<option value="' . $k . '">' . h($op['l']) . ' · ' . (int)$op['p'] . '</option>';
         $o .= '</select></label>';
     }
-    $o .= '</div><div class="foot"><span class="price">' . ($mp === null ? '<span class="tbd">Prix à venir</span>' : h(price_label($i))) . '</span>';
+    $o .= '</div>' . drink_html(drinks($i, $c['id'])) . '<div class="foot"><span class="price">' . ($mp === null ? '<span class="tbd">Prix à venir</span>' : h(price_label($i))) . '</span>';
     $o .= '<button class="add" type="button" aria-label="Ajouter ' . h($i['name']) . ' à ma commande"' . ($addable ? '' : ' disabled') . '>' . $ICON['plus'] . '</button></div></article>';
     return $o;
 }
@@ -120,7 +128,7 @@ $js = [];
 foreach ($cats as $k => $c) {
     $js[] = ['id' => $c['id'], 'title' => $c['title'], 'num' => $k + 1, 'items' => array_map(fn($i) => [
         'code' => $i['code'], 'name' => $i['name'], 'price' => $i['price'], 'desc' => $i['desc'], 'badge' => bd($i),
-        'pcs' => !empty($i['showPcs']) ? (int)$i['pcs'] : 0, 'photo' => $i['img'], 'opts' => $i['opts'], 'pers' => $i['pers'],
+        'pcs' => !empty($i['showPcs']) ? (int)$i['pcs'] : 0, 'photo' => $i['img'], 'opts' => $i['opts'], 'pers' => $i['pers'], 'drink' => drinks($i, $c['id']),
     ], $c['items'])];
 }
 
