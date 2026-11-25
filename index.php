@@ -1,5 +1,5 @@
 <?php
-/* Twins Sushi — page publique (design Indigo, maquette 1b), générée à partir de la base Supabase */
+/* Twins Sushi — page publique (La Carte · Twins Sushi), générée à partir de la base Supabase */
 declare(strict_types=1);
 require __DIR__ . '/inc/bootstrap.php';
 date_default_timezone_set('Africa/Casablanca');
@@ -105,7 +105,7 @@ foreach ($cats as $c) foreach ($c['items'] as $i) $byName[$i['name']] = $i + ['c
 $sigNames = ['Twins Deluxe', 'Dragon Roll', 'Crunchy Crevette', 'Okinawa Anguille'];
 /* Photos de biais du shooting (assets/beaute/) ; sans photo de biais : plateau vu de dessus + loupe. */
 $sigBeau = ['Dragon Roll' => 'dragon-naturel', 'Crunchy Crevette' => 'crunchy-naturel', 'Okinawa Anguille' => 'okinawa-naturel'];   /* photos naturelles, recette unique (25 nov. 2026) */
-$sigLoupe = ['Twins Deluxe' => 'loupe-twins-deluxe'];
+$sigLoupe = [];   /* loupes retirées (petits recadrages agrandis), Houssam 25 nov. 2026 */
 /* Box à composer : le client choisit librement ses 4 rolls dans ces rubriques (Houssam, 22 novembre 2026). */
 $boxCats = ['street-rolls', 'spring', 'signature-rolls', 'california', 'crousty', 'aromaki', 'maki'];
 $sigs = [];
@@ -136,7 +136,7 @@ foreach ($cats as $k => $c) {
 $daymap = ['0' => 'Sunday', '1' => 'Monday', '2' => 'Tuesday', '3' => 'Wednesday', '4' => 'Thursday', '5' => 'Friday', '6' => 'Saturday'];
 $ld = [
     '@context' => 'https://schema.org', '@type' => 'Restaurant', 'name' => 'Twins Sushi',
-    'url' => $S['url'], 'image' => $S['url'] . '/assets/img/og-indigo.jpg', 'logo' => $S['url'] . '/assets/img/icon-512.png',
+    'url' => $S['url'], 'image' => $S['url'] . '/assets/img/og-twins-sushi.jpg', 'logo' => $S['url'] . '/assets/img/icon-512.png',
     'telephone' => $S['tel'], 'email' => $S['email'], 'servesCuisine' => ['Sushi', 'Japonaise', 'Asiatique'],
     'currenciesAccepted' => 'MAD', 'acceptsReservations' => false,
     'address' => ['@type' => 'PostalAddress', 'streetAddress' => $S['rue'], 'addressLocality' => $S['ville'],
@@ -189,8 +189,8 @@ header('Cache-Control: public, max-age=120');
 <link rel="manifest" href="site.webmanifest">
 <meta property="og:type" content="restaurant"><meta property="og:locale" content="fr_MA"><meta property="og:site_name" content="Twins Sushi">
 <meta property="og:title" content="Twins Sushi · Sushis à Maârif, Casablanca"><meta property="og:description" content="<?= h($desc) ?>">
-<meta property="og:url" content="<?= h($S['url']) ?>/"><meta property="og:image" content="<?= h($S['url']) ?>/assets/img/og-indigo.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="<?= h($S['url']) ?>/assets/img/og-indigo.jpg">
+<meta property="og:url" content="<?= h($S['url']) ?>/"><meta property="og:image" content="<?= h($S['url']) ?>/assets/img/og-twins-sushi.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="<?= h($S['url']) ?>/assets/img/og-twins-sushi.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="<?= h($fontJp) ?>">
@@ -205,7 +205,7 @@ header('Cache-Control: public, max-age=120');
 <header class="bar"><div class="wrap">
 <a class="brand" href="#top" aria-label="Twins Sushi, haut de page"><img class="logo-d" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="66" height="60"><img class="logo-l" src="assets/img/logo-96.webp" alt="Twins Sushi" width="66" height="60"></a>
 <nav class="nav" aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a></nav>
-<button class="theme" type="button" aria-label="Changer de thème (indigo / crème)" title="Indigo / crème"><?= $ICON['moon'] ?></button>
+<button class="theme" type="button" aria-label="Changer de thème (sombre / clair)" title="Sombre / clair"><?= $ICON['moon'] ?></button>
 <button class="cart-btn" type="button" data-open-cart aria-label="Voir ma commande"><?= $ICON['bag'] ?><span class="lbl">Ma commande</span><span class="n cart-count">0</span></button>
 </div></header>
 

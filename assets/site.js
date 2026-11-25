@@ -1,5 +1,5 @@
 /* Twins Sushi — interactions du site (généré par maquettes/_outils/make_site_assets.py).
-   Noyau des maquettes Indigo.
+   Noyau des maquettes.
    Reprend les fonctions du site actuel (assets/app.js, assets/home.js) :
    carte, recherche, filtres Végé / Épicé, navigation par rubrique, panier, commande WhatsApp,
    « composez votre box », horaires du jour, thème clair / sombre, plan chargé au clic.
