@@ -314,7 +314,7 @@
   };
   function initOpen() {
     var st = T.openStatus(); if (!st) return;
-    $$(".openst").forEach(function (el) { el.textContent = st.text; el.classList.toggle("is-open", st.open); el.hidden = false; });
+    $$(".openst").forEach(function (el) { if (el.hasAttribute("data-court")) { var q = st.text.split(" · "); el.innerHTML = "<b>" + q[0] + "</b>" + (q[1] ? "<span class=\"st-l\"> · " + q[1] + "</span>" : ""); } else el.textContent = st.text; el.classList.toggle("is-open", st.open); el.hidden = false; });
   }
 
   /* ---------- Démarrage : à appeler une fois la carte rendue par la version ---------- */

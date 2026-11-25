@@ -204,6 +204,7 @@ header('Cache-Control: public, max-age=120');
 <?php if (!empty($S['annonce'])): ?><div class="annonce" role="note"><?= h($S['annonce']) ?></div><?php endif; ?>
 <header class="bar"><div class="wrap">
 <a class="brand" href="#top" aria-label="Twins Sushi, haut de page"><img class="logo-d" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="66" height="60"><img class="logo-l" src="assets/img/logo-96.webp" alt="Twins Sushi" width="66" height="60"></a>
+<span class="openst hdr-st" data-court hidden></span>
 <nav class="nav" aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="#y-aller" data-y-aller>Y aller</a></nav>
 <a class="go-pin" href="#y-aller" data-y-aller aria-label="Y aller : adresse et plan"><?= $ICON['pin'] ?><span>Y aller</span></a>
 <button class="theme" type="button" aria-label="Changer de thème (sombre / clair)" title="Sombre / clair"><?= $ICON['moon'] ?></button>
