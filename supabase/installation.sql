@@ -355,8 +355,8 @@ insert into public.items (code, category_id, name, description, price, pcs, show
 
 insert into public.settings (key, value) values
   ('url', '"https://www.twinssushi.com"'::jsonb),
-  ('tel_affiche', '"05 21 23 19 26"'::jsonb),
-  ('tel', '"+212521231926"'::jsonb),
+  ('tel_affiche', '"06 19 16 20 94"'::jsonb),
+  ('tel', '"+212619162094"'::jsonb),
   ('wa_affiche', '"06 19 16 20 94"'::jsonb),
   ('wa', '"212619162094"'::jsonb),
   ('email', '"twins.sushi01@gmail.com"'::jsonb),

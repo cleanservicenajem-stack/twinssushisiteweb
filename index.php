@@ -295,7 +295,11 @@ header('Cache-Control: public, max-age=120');
 <div class="info"><h3>Adresse</h3><p><?= h($S['rue']) ?><br><?= h($S['quartier']) ?>, <?= h($S['cp']) ?> <?= h($S['ville']) ?></p><p><a href="<?= h($maps) ?>" target="_blank" rel="noopener">Itinéraire Google Maps</a></p></div>
 <div class="info"><h3>Horaires</h3><p><span class="openst" hidden></span></p><table class="hours"><tbody><?php foreach ($S['horaires'] as $hh): ?><tr data-days="<?= h($hh['days']) ?>"><td><?= h($hh['label']) ?></td><td><?= h($hh['text']) ?></td></tr><?php endforeach; ?></tbody></table><p class="small">Livraison et à emporter, 7j/7.</p></div>
 <div class="info"><h3>Contact</h3>
-<p>Téléphone : <a href="tel:<?= h($S['tel']) ?>"><?= h($S['tel_affiche']) ?></a><br>WhatsApp : <a href="https://wa.me/<?= h($S['wa']) ?>" target="_blank" rel="noopener"><?= h($S['wa_affiche']) ?></a><?php if (!empty($S['email'])): ?><br>E-mail : <a href="mailto:<?= h($S['email']) ?>"><?= h($S['email']) ?></a><?php endif; ?></p>
+<?php if (preg_replace('/\D/', '', (string)$S['tel']) === preg_replace('/\D/', '', (string)$S['wa'])): /* un seul numéro (Houssam, 25 nov. 2026) */ ?>
+<p>Téléphone et WhatsApp : <a href="tel:<?= h($S['tel']) ?>"><?= h($S['tel_affiche']) ?></a> · <a href="https://wa.me/<?= h($S['wa']) ?>" target="_blank" rel="noopener">écrire sur WhatsApp</a>
+<?php else: ?>
+<p>Téléphone : <a href="tel:<?= h($S['tel']) ?>"><?= h($S['tel_affiche']) ?></a><br>WhatsApp : <a href="https://wa.me/<?= h($S['wa']) ?>" target="_blank" rel="noopener"><?= h($S['wa_affiche']) ?></a>
+<?php endif; ?><?php if (!empty($S['email'])): ?><br>E-mail : <a href="mailto:<?= h($S['email']) ?>"><?= h($S['email']) ?></a><?php endif; ?></p>
 <p><?= implode(' · ', array_merge($social, ['<a href="' . h($avis) . '" target="_blank" rel="noopener">Laisser un avis Google</a>'])) ?></p>
 <p class="small">Allergies ou intolérances ? Précisez-le à la commande. Allergènes sur demande : poisson, crustacés, gluten, sésame, lait, œuf, soja.</p></div>
 </div>

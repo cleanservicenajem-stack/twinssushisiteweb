@@ -304,7 +304,7 @@
       '<section class="panel"><h2 class="t-titre">Horaires</h2><div id="hours">' + (s.horaires || []).map(hoursRow).join("") + '</div>' +
       '<div><button class="b sm" type="button" id="addh">+ Ajouter une ligne</button></div></section>' +
       '<section class="panel"><h2 class="t-titre">Contact et adresse</h2><div class="row2">' +
-      fld("tel_affiche", "Téléphone (affiché)", { ph: "05 21 23 19 26" }) + fld("tel", "Téléphone (format international)", { ph: "+212521231926", help: "Utilisé pour le bouton « Appeler »." }) +
+      fld("tel_affiche", "Téléphone (affiché)", { ph: "06 19 16 20 94" }) + fld("tel", "Téléphone (format international)", { ph: "+212619162094", help: "Utilisé pour le bouton « Appeler »." }) +
       fld("wa_affiche", "WhatsApp (affiché)", { ph: "07 19 16 20 94" }) + fld("wa", "WhatsApp (format international)", { ph: "212719162094", help: "Reçoit les commandes des clients. Sans le +." }) +
       fld("email", "E-mail", { type: "email" }) + fld("rue", "Rue") + fld("quartier", "Quartier") + fld("cp", "Code postal") + fld("ville", "Ville") + '</div></section>' +
       '<section class="panel"><h2 class="t-titre">Plateformes et réseaux</h2><p class="hint">Collez l’adresse complète de votre page (https://…). Vide = « bientôt » sur le site.</p><div class="row2">' +

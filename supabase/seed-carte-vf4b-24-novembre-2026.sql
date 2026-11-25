@@ -1,3 +1,4 @@
+-- DÉJÀ EXÉCUTÉ le 24 novembre 2026 (carte en ligne). NE PAS REJOUER. Version suivante : seed-carte-vf5-25-novembre-2026.sql (Crispy Salmon).
 -- Twins Sushi — carte Indigo VF2 corrigée = VF4 (24 novembre 2026, 146 produits) : Neige Crevette Pochée Avocat 45 (« crevette pochée, avocat, oignon crispy », Houssam 24 nov.) dans les Street Rolls, plus de California Crevette Pochée.
 -- À exécuter APRÈS migration-carte-vf.sql, dans le SQL Editor de Supabase, après avoir vérifié la sauvegarde.
 -- Remplace uniquement la carte (catégories + plats). Réglages, horaires, comptes admin : intacts.
