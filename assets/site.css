@@ -475,3 +475,4 @@ a.trio-c:hover .trio-go { border-color: var(--gold); }
 /* Logo seul — En-tête : logo seul, sans le nom écrit à côté (Houssam, 25 novembre 2026) */
 .bar .brand img { height: 52px; width: auto; }
 @media (max-width: 760px) { .bar .brand img { height: 46px; } }
+.f-small a { color: var(--gold); text-decoration: none; } .stats b small { font-size: .38em; margin-right: 4px; vertical-align: middle; }

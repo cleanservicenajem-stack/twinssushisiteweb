@@ -81,9 +81,9 @@ foreach ($M['categories'] as $c) {
     if (!$items) continue;
     $c['items'] = $items;
     $cats[] = $c;
+    $nb += count($items);
     if ($c['id'] !== 'boissons') {
         foreach ($items as $i) {
-            $nb++;
             $p = min_price($i);
             if ($p !== null && ($minP === null || $p < $minP)) $minP = $p;
         }
@@ -216,7 +216,7 @@ header('Cache-Control: public, max-age=120');
 <a class="h2-scroll" href="#rouler"><span>Découvrir</span><i></i></a>
 </section>
 
-<section class="stats wrap"><div><b data-to="<?= $nb ?>"><?= $nb ?></b><span>plats à la carte</span></div><div><b data-to="<?= $nbCats ?>"><?= $nbCats ?></b><span>rubriques</span></div><div><b>7<small>j/7</small></b><span>livraison et à emporter</span></div><div><b data-to="<?= (int)$minP ?>"><?= (int)$minP ?></b><span>dès</span></div></section>
+<section class="stats wrap"><div><b data-to="<?= $nb ?>"><?= $nb ?></b><span>plats à la carte</span></div><div><b data-to="<?= $nbCats ?>"><?= $nbCats ?></b><span>rubriques</span></div><div><b>7<small>j/7</small></b><span>livraison et à emporter</span></div><div><b><small>dès </small><?= (int)$minP ?></b><span>pour commencer</span></div></section>
 
 <section class="sec rouler" id="rouler"><div class="kj-bg" aria-hidden="true" lang="ja">双子</div><div class="wrap">
 <div class="sec-head"><h2>Trois façons de rouler</h2><span class="jp" lang="ja">双子</span><span class="rule"></span></div>
@@ -311,7 +311,7 @@ header('Cache-Control: public, max-age=120');
 <img class="f-logo" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="120" height="110" loading="lazy">
 <p class="f-slogan">« Jamais l’un sans l’autre »</p>
 <div class="links"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="assets/carte/carte-twins-sushi.pdf" download="Carte_Twins_Sushi.pdf">Carte en PDF</a><?= implode('', $social) ?></div>
-<p class="f-small"><?= h($S['rue']) ?> · <?= h($S['quartier']) ?> · <?= h($S['ville']) ?> · WhatsApp <?= h($S['wa_affiche']) ?></p>
+<p class="f-small"><?= h($S['rue']) ?> · <?= h($S['quartier']) ?> · <?= h($S['ville']) ?> · <a href="<?= h($waOrder) ?>" target="_blank" rel="noopener">WhatsApp <?= h($S['wa_affiche']) ?></a></p>
 <p class="f-small">Prix en dirhams TTC. © <?= date('Y') ?> Twins Sushi</p>
 </div></footer>
 
