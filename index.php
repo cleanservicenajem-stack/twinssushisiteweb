@@ -195,7 +195,7 @@ header('Cache-Control: public, max-age=120');
 <?php if ($showRibbon): ?><div class="ribbon" role="note"><?= h($S['bandeau_texte']) ?></div><?php endif; ?>
 <?php if (!empty($S['annonce'])): ?><div class="annonce" role="note"><?= h($S['annonce']) ?></div><?php endif; ?>
 <header class="bar"><div class="wrap">
-<a class="brand" href="#top" aria-label="Twins Sushi, haut de page"><img class="logo-d" src="assets/img/logo-creme-96.webp" alt="" width="53" height="48"><img class="logo-l" src="assets/img/logo-96.webp" alt="" width="53" height="48"><span>Twins Sushi</span></a>
+<a class="brand" href="#top" aria-label="Twins Sushi, haut de page"><img class="logo-d" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="66" height="60"><img class="logo-l" src="assets/img/logo-96.webp" alt="Twins Sushi" width="66" height="60"></a>
 <nav class="nav" aria-label="Navigation principale"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a></nav>
 <button class="theme" type="button" aria-label="Changer de thème (indigo / crème)" title="Indigo / crème"><?= $ICON['moon'] ?></button>
 <button class="cart-btn" type="button" data-open-cart aria-label="Voir ma commande"><?= $ICON['bag'] ?><span class="lbl">Ma commande</span><span class="n cart-count">0</span></button>
