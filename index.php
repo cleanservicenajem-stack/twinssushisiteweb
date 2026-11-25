@@ -239,7 +239,7 @@ header('Cache-Control: public, max-age=120');
 </div></section>
 
 <?php $bx = []; foreach ($cats as $c) if ($c['id'] === 'box') foreach ($c['items'] as $i) if (!empty($i['showPcs'])) $bx[] = (int)$i['pcs']; ?>
-<section class="band" aria-label="Les box à partager"><img src="assets/beaute/bateau-pres.webp" alt="Un bateau de sushis Twins Sushi" width="1640" height="920" loading="lazy">
+<section class="band" aria-label="Les box à partager"><img src="assets/beaute/box-compo.webp" alt="Twins Deluxe, Premium Box et Party Box" width="1640" height="920" loading="lazy">
 <div class="wrap band-in rv"><span class="kicker">À partager</span><h2 class="display">Les Box</h2>
 <?php if ($bx): ?><p>De <?= min($bx) ?> à <?= max($bx) ?> pièces, le détail pièce par pièce.</p><?php endif; ?>
 <a class="btn btn-plein" href="#box">Voir les box</a></div></section>

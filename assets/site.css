@@ -488,3 +488,5 @@ a.trio-c:hover .trio-go { border-color: var(--gold); }
 .h3-tag { bottom: 40px; }
 @media (max-width: 900px) { .h3-photo.h3-cadre { position: relative; right: auto; left: auto; top: auto; width: calc(100% - 32px); margin: 16px 16px 24px; } }
 .trio-ph > img:first-child { aspect-ratio: 4/3; object-fit: cover; }
+.band > img[src*='box-compo'] { object-position: 80% 50%; }
+@media (max-width: 760px) { .band > img[src*='box-compo'] { object-position: 72% 50%; opacity: .55; } }
