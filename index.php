@@ -218,7 +218,7 @@ header('Cache-Control: public, max-age=120');
 <h1 class="display">« Jamais l’un<br><em>sans l’autre</em> »</h1>
 <p class="sub">Makis, california, rolls Tamago, Pink et Neige, chirashi, poke et bentos préparés chaque jour dans notre cuisine du <?= h($S['rue']) ?>. Livraison et à emporter, 7j/7.</p>
 <div class="ctas"><a class="btn btn-plein" href="#carte">Voir la carte</a><a class="btn btn-ligne" href="<?= h($waOrder) ?>" target="_blank" rel="noopener"><?= $ICON['wa'] ?>Commander sur WhatsApp</a></div>
-<div class="h2-meta"><span class="openst" hidden></span><a class="dl-link" href="assets/carte/carte-twins-sushi.pdf" download="Carte_Twins_Sushi.pdf" type="application/pdf">Télécharger la carte (PDF, 5 Mo)</a></div>
+<div class="h2-meta"><span class="openst" hidden></span><a class="dl-link" href="assets/carte/carte-twins-sushi-smartphone.pdf" target="_blank" rel="noopener" type="application/pdf">Carte PDF (téléphone)</a><a class="dl-link dl-2" href="assets/carte/carte-twins-sushi.pdf" target="_blank" rel="noopener" type="application/pdf">Grande carte PDF</a></div>
 </div></div>
 <?php if (isset($byName['Okinawa Anguille'])): ?><a class="h3-tag" href="#signature-rolls"><b>Okinawa Anguille</b><span><?= h($byName['Okinawa Anguille']['desc']) ?> · <?= h(price_label($byName['Okinawa Anguille'])) ?></span></a><?php endif; ?>
 <a class="h2-scroll" href="#rouler"><span>Découvrir</span><i></i></a>
@@ -283,7 +283,7 @@ header('Cache-Control: public, max-age=120');
 <p class="tip"><b>Astuce</b> Composez votre commande avec le bouton + sur la carte : on reçoit la liste complète sur WhatsApp, prête à préparer.</p>
 </div></section>
 
-<section class="sec sec-carte" id="carte" aria-labelledby="h-carte"><div class="wrap"><div class="sec-head"><h2 id="h-carte">La carte</h2><span class="jp" lang="ja">お品書き</span><span class="rule"></span><a class="btn btn-ligne dl-btn" href="assets/carte/carte-twins-sushi.pdf" download="Carte_Twins_Sushi.pdf" type="application/pdf">Carte en PDF</a></div>
+<section class="sec sec-carte" id="carte" aria-labelledby="h-carte"><div class="wrap"><div class="sec-head"><h2 id="h-carte">La carte</h2><span class="jp" lang="ja">お品書き</span><span class="rule"></span><a class="btn btn-ligne dl-btn" href="assets/carte/carte-twins-sushi-smartphone.pdf" target="_blank" rel="noopener" type="application/pdf">Carte en PDF</a></div>
 <div class="menu-tools"><div class="tools-row"><label class="search" for="q"><?= $ICON['search'] ?><span class="sr">Rechercher un plat</span><input id="q" type="search" placeholder="Saumon, crevette, avocat…" autocomplete="off" enterkeyhint="search"></label>
 <span class="qcount" id="q-count" aria-live="polite"></span><div class="filters"><button class="fchip vege" type="button" data-f="veggie" aria-pressed="false"><i></i>Veggie</button><button class="fchip epice" type="button" data-f="epice" aria-pressed="false"><i></i>Épicé</button></div></div>
 <nav class="cats" aria-label="Rubriques de la carte"><?php foreach ($cats as $c): ?><a href="#<?= h($c['id']) ?>"><?= h($c['title']) ?></a><?php endforeach; ?></nav></div></div>
@@ -318,7 +318,7 @@ header('Cache-Control: public, max-age=120');
 <footer class="foot2"><div class="wrap">
 <img class="f-logo" src="assets/img/logo-creme-240.webp" alt="Twins Sushi" width="120" height="110" loading="lazy">
 <p class="f-slogan">« Jamais l’un sans l’autre »</p>
-<div class="links"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="assets/carte/carte-twins-sushi.pdf" download="Carte_Twins_Sushi.pdf">Carte en PDF</a><?= implode('', $social) ?></div>
+<div class="links"><a href="#carte">La carte</a><a href="#commander">Commander</a><a href="#infos">Infos pratiques</a><a href="assets/carte/carte-twins-sushi-smartphone.pdf" target="_blank" rel="noopener">Carte (téléphone)</a><a href="assets/carte/carte-twins-sushi.pdf" target="_blank" rel="noopener">Grande carte (PDF)</a><?= implode('', $social) ?></div>
 <p class="f-small"><?= h($S['rue']) ?> · <?= h($S['quartier']) ?> · <?= h($S['ville']) ?> · <a href="<?= h($waOrder) ?>" target="_blank" rel="noopener">WhatsApp <?= h($S['wa_affiche']) ?></a></p>
 <p class="f-small">Prix en dirhams TTC. © <?= date('Y') ?> Twins Sushi</p>
 </div></footer>
