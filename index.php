@@ -132,6 +132,11 @@ foreach ($cats as $k => $c) {
     ], $c['items'])];
 }
 
+/* Quartiers livrés : liste confirmée par Houssam le 26 novembre 2026 */
+$zones = ['Maârif', 'Maârif Extension', 'Gauthier', 'Racine', 'Bourgogne', 'Palmier', 'Mers Sultan', 'Belvédère', 'Les Hôpitaux',
+          'Derb Ghallef', 'Oasis', 'Beauséjour', 'Anfa', 'CIL', 'Hay Hassani', 'Centre-ville', 'Quartier des Habous', 'Val Fleuri',
+          'Polo', 'Californie', 'Les Princesses'];
+
 /* Données structurées Google (Restaurant + carte) */
 $daymap = ['0' => 'Sunday', '1' => 'Monday', '2' => 'Tuesday', '3' => 'Wednesday', '4' => 'Thursday', '5' => 'Friday', '6' => 'Saturday'];
 $ld = [
@@ -144,6 +149,7 @@ $ld = [
     'openingHoursSpecification' => array_map(fn($hh) => ['@type' => 'OpeningHoursSpecification',
         'dayOfWeek' => array_map(fn($d) => $daymap[trim($d)] ?? '', explode(',', $hh['days'])),
         'opens' => $hh['open'], 'closes' => $hh['close']], $S['horaires']),
+    'areaServed' => array_map(fn($z) => ['@type' => 'Place', 'name' => $z . ', Casablanca'], $zones),
     'sameAs' => array_values(array_filter([$S['instagram'] ?? '', $S['tiktok'] ?? '', $S['facebook'] ?? ''])),
     'hasMenu' => ['@type' => 'Menu', 'name' => 'La carte Twins Sushi', 'inLanguage' => 'fr', 'hasMenuSection' => array_map(fn($c) => [
         '@type' => 'MenuSection', 'name' => $c['title'], 'hasMenuItem' => array_map(function ($i) {
@@ -314,6 +320,12 @@ header('Cache-Control: public, max-age=120');
 <p class="small">Allergies ou intolérances ? Précisez-le à la commande. Allergènes sur demande : poisson, crustacés, gluten, sésame, lait, œuf, soja.</p></div>
 </div>
 <div class="map" data-src="https://www.google.com/maps?q=<?= rawurlencode($S['rue'] . ' ' . $S['ville']) ?>&amp;output=embed"><button type="button" class="btn btn-ligne map-load"><?= $ICON['pin'] ?>Afficher le plan</button></div>
+</div></section>
+<section class="sec zones" id="livraison" aria-labelledby="h-zones"><div class="wrap">
+<h2 id="h-zones">Sushis à Maârif, livrés dans Casablanca</h2>
+<p>Twins Sushi prépare chaque jour des sushis et de la cuisine asiatique au <?= h($S['rue']) ?>, à Maârif : makis, california, rolls Tamago, Pink et Neige, chirashi, poke et bentos. Livraison et à emporter, 7j/7. Commandez sur WhatsApp ou directement depuis la carte du site.</p>
+<h3>Quartiers livrés</h3>
+<ul class="zones-liste"><?php foreach ($zones as $z): ?><li><?= h($z) ?></li><?php endforeach; ?></ul>
 </div></section>
 </main>
 

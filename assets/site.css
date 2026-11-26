@@ -503,3 +503,10 @@ a.trio-c:hover .trio-go { border-color: var(--gold); }
 .hdr-st b { font-weight: 700; } .hdr-st .st-l { margin-left: -8px; white-space: pre; }
 @media (max-width: 760px) { .hdr-st .st-l { display: none; } .go-pin { margin-left: 0; } }
 @media (max-width: 360px) { .go-pin span { display: none; } }
+/* Bloc « Sushis à Maârif, livrés dans Casablanca » + quartiers livrés (Houssam, 26 nov. 2026) */
+.zones { padding-top: 10px; }
+.zones h2 { font: 400 30px var(--serif); margin-bottom: 12px; }
+.zones p { max-width: 760px; color: var(--ink2); line-height: 1.6; }
+.zones h3 { font: 700 12px var(--sans); letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin: 22px 0 10px; }
+.zones-liste { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; padding: 0; margin: 0; }
+.zones-liste li { font: 600 13px var(--sans); color: var(--ink2); border: 1px solid var(--line); border-radius: 999px; padding: 6px 12px; }
